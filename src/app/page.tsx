@@ -74,6 +74,7 @@ async function FeaturedProducts() {
           <Product key={product._id} product={product} />
         ))}
       </div>
+      <pre>{JSON.stringify(featuredProducts, null, 2)}</pre>
     </div>
   );
 }
