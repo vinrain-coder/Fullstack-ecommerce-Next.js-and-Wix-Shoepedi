@@ -1,5 +1,5 @@
 import Image from "next/image";
-import banner from "@/assets/banner.jpg";
+import banner from "../assets/banner.jpg";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -28,11 +28,11 @@ export default function Home() {
           </Button>
         </div>
         <div className="relative hidden md:block w-1/2 h-full">
-          {/* <Image
+          <Image
             src={banner}
             alt="Shoepedi Banner"
             className="h-full object-cover"
-          /> */}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary via-transparent to-transparent" />
         </div>
       </div>
@@ -74,7 +74,6 @@ async function FeaturedProducts() {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <pre>{JSON.stringify(featuredProducts, null, 2)}</pre>
     </div>
   );
 }
