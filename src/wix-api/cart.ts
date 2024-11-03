@@ -2,6 +2,7 @@ import { products } from "@wix/stores";
 import { wixClient } from "../lib/wix-client.base";
 import { WIX_STORES_APP_ID } from "../lib/constants";
 import { findVariant } from "../lib/utils";
+import { WixClient } from "@wix/sdk";
 
 export async function getCart(wixClient: wixClient) {
   try {
@@ -45,4 +46,25 @@ export async function addToCart(
       },
     ],
   });
+}
+
+export interface UpdateCartItemQuantityValues {
+  productId: string;
+  newQuantity: number;
+}
+
+export async function updateCartItemQuantity(
+  wixClient: wixClient,
+  { productId, newQuantity }: UpdateCartItemQuantityValues
+) {
+  return wixClient.currentCart.updateCurrentCartLineItemQuantity([
+    {
+      _id: productId,
+      quantity: newQuantity,
+    },
+  ]);
+}
+
+export async function removeCartItem(wixClient: wixClient, productId: string) {
+  return wixClient.currentCart.removeLineItemsFromCurrentCart([productId]);
 }
