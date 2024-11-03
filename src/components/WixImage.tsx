@@ -1,5 +1,7 @@
-import { ImgHTMLAttributes } from "react";
+/* eslint-disable @next/next/no-img-element */
+
 import { media as wixMedia } from "@wix/sdk";
+import { ImgHTMLAttributes } from "react";
 
 type WixImageProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -9,7 +11,11 @@ type WixImageProps = Omit<
   placeholder?: string;
   alt?: string | null | undefined;
 } & (
-    | { scaleToFill?: true; width: number; height: number }
+    | {
+        scaleToFill?: true;
+        width: number;
+        height: number;
+      }
     | {
         scaleToFill: false;
       }
@@ -23,7 +29,7 @@ export default function WixImage({
 }: WixImageProps) {
   const imageUrl = mediaIdentifier
     ? props.scaleToFill || props.scaleToFill === undefined
-      ? wixMedia.getScaledToFitImageUrl(
+      ? wixMedia.getScaledToFillImageUrl(
           mediaIdentifier,
           props.width,
           props.height,
