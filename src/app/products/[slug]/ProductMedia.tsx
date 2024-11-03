@@ -13,8 +13,7 @@ export default function ProductMedia({ media }: ProductMediaProps) {
 
   useEffect(() => {
     setSelectedMedia(media?.[0]);
-  }),
-    [media];
+  }, [media]);
 
   if (!media?.length) return null;
 
