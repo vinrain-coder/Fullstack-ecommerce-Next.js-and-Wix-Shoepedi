@@ -55,7 +55,7 @@ export default function UserButton({
             Logout
           </DropdownMenuItem>
         ) : (
-          <DropdownMenuItem onClick={() => login}>
+          <DropdownMenuItem onClick={() => login()}>
             <LogInIcon className="mr-2 size-4" />
             Login
           </DropdownMenuItem>
