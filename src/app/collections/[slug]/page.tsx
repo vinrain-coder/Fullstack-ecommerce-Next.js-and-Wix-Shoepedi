@@ -29,7 +29,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: Awaited<{ slug: string }> }) {
+  const { slug } = await params;
+
   const collection = await getCollectionBySlug(getWixServerClient(), params.slug);
 
   if (!collection) return notFound();
