@@ -1,3 +1,5 @@
+"use client"
+
 import { Skeleton } from "@/components/ui/skeleton";
 import WixImage from "@/components/WixImage";
 import { cn } from "@/lib/utils";
