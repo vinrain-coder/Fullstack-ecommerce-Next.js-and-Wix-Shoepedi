@@ -8,13 +8,14 @@ import { Suspense } from "react";
 
 interface LayoutProps {
   children: React.ReactNode;
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export default function Layout({ children, params }: LayoutProps) {
+export default async function Layout({ children, params }: LayoutProps) {
+  const { slug } = await params; // Await the promise
   return (
     <Suspense fallback={<LoadingSkeleton />}>
-      <CollectionsLayout params={params}>{children}</CollectionsLayout>
+      <CollectionsLayout params={{ slug }}>{children}</CollectionsLayout>
     </Suspense>
   );
 }
