@@ -1,5 +1,6 @@
 "use client";
 
+// import CheckoutButton from "@/components/CheckoutButton";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -26,6 +27,7 @@ export default function ShoppingCartButton({
   initialData,
 }: ShoppingCartButtonProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
+
   const cartQuery = useCart(initialData);
 
   const totalQuantity =
@@ -39,7 +41,7 @@ export default function ShoppingCartButton({
       <div className="relative">
         <Button variant="ghost" size="icon" onClick={() => setSheetOpen(true)}>
           <ShoppingCartIcon />
-          <span className="absolute right-0 top-0 size-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+          <span className="absolute right-0 top-0 flex size-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
             {totalQuantity < 10 ? totalQuantity : "9+"}
           </span>
         </Button>
@@ -88,7 +90,7 @@ export default function ShoppingCartButton({
           <hr />
           <div className="flex items-center justify-between gap-5">
             <div className="space-y-0.5">
-              <p className="text-sm">Subtotal amount: </p>
+              <p className="text-sm">Subtotal amount:</p>
               <p className="font-bold">
                 {/* @ts-expect-error */}
                 {cartQuery.data?.subtotal?.formattedConvertedAmount}
@@ -97,9 +99,10 @@ export default function ShoppingCartButton({
                 Shipping and taxes calculated at checkout
               </p>
             </div>
-            <Button size="lg" disabled={!totalQuantity || cartQuery.isFetching}>
-              Checkout
-            </Button>
+            {/* <CheckoutButton
+              size="lg"
+              disabled={!totalQuantity || cartQuery.isFetching}
+            /> */}
           </div>
         </SheetContent>
       </Sheet>
@@ -165,7 +168,7 @@ function ShoppingCartItem({
           </p>
         )}
         <div className="flex items-center gap-2">
-          {item.quantity} * {item.price?.formattedConvertedAmount}
+          {item.quantity} x {item.price?.formattedConvertedAmount}
           {item.fullPrice && item.fullPrice.amount !== item.price?.amount && (
             <span className="text-muted-foreground line-through">
               {item.fullPrice.formattedConvertedAmount}
@@ -200,11 +203,7 @@ function ShoppingCartItem({
           >
             +
           </Button>
-          {quantityLimitReached && (
-            <span className="text-sm text-destructive">
-              Quantity limit reached
-            </span>
-          )}
+          {quantityLimitReached && <span>Quantity limit reached</span>}
         </div>
       </div>
     </li>
