@@ -1,8 +1,8 @@
+@import "react-medium-image-zoom/dist/styles.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "react-medium-image-zoom/dist/styles.css";
 
 :root {
   --background: 0 0% 100%;
