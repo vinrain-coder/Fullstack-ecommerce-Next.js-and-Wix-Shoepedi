@@ -8,7 +8,8 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 interface PageProps {
-  params: { slug: string };
+  children: React.ReactNode;
+  params: { slug?: string } | any;
 }
 
 export async function generateMetadata({
