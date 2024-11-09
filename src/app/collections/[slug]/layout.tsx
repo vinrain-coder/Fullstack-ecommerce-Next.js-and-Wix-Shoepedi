@@ -1,6 +1,6 @@
 import { Skeleton } from "@/src/components/ui/skeleton";
 import WixImage from "@/src/components/WixImage";
-import { cn, delay } from "@/src/lib/utils";
+import { cn } from "@/src/lib/utils";
 import { getWixServerClient } from "@/src/lib/wix-client.server";
 import { getCollectionBySlug } from "@/src/wix-api/collections";
 import { notFound } from "next/navigation";
@@ -11,43 +11,16 @@ interface LayoutProps {
   params: { slug: string };
 }
 
-// Suspense fallback component
-function LoadingSkeleton() {
-  return (
-    <main className="mx-auto max-w-7xl space-y-10 px-5 py-10">
-      <Skeleton className="mx-auto h-10 w-48 sm:block sm:aspect-[1280/400] sm:h-full sm:w-full" />
-      <div className="space-y-5">
-        <h2 className="text-2xl font-bold">Products</h2>
-        <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <Skeleton key={i} className="h-[26rem] w-full" />
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
-
 export default function Layout({ children, params }: LayoutProps) {
   return (
     <Suspense fallback={<LoadingSkeleton />}>
-      {/* Use Suspense with a server component */}
-      
       <CollectionsLayout params={params}>{children}</CollectionsLayout>
     </Suspense>
   );
 }
 
-async function CollectionsLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { slug: string };
-}) {
-  await delay(2000); // Simulating a delay
-
-  const collection = await getCollectionBySlug(getWixServerClient(), params.slug);
+async function CollectionsLayout({ children, params: { slug } }: LayoutProps) {
+  const collection = await getCollectionBySlug(getWixServerClient(), slug);
 
   if (!collection) notFound();
 
@@ -62,7 +35,7 @@ async function CollectionsLayout({
               mediaIdentifier={banner.url}
               width={1280}
               height={400}
-              alt={banner.altText || ""}
+              alt={banner.altText}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
             <h1 className="absolute bottom-10 left-1/2 -translate-x-1/2 text-4xl font-bold text-white lg:text-5xl">
@@ -73,13 +46,29 @@ async function CollectionsLayout({
         <h1
           className={cn(
             "mx-auto text-3xl font-bold md:text-4xl",
-            banner && "sm:hidden"
+            banner && "sm:hidden",
           )}
         >
           {collection.name}
         </h1>
       </div>
       {children}
+    </main>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <main className="mx-auto max-w-7xl space-y-10 px-5 py-10">
+      <Skeleton className="mx-auto h-10 w-48 sm:block sm:aspect-[1280/400] sm:h-full sm:w-full" />
+      <div className="space-y-5">
+        <h2 className="text-2xl font-bold">Products</h2>
+        <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <Skeleton key={i} className="h-[26rem] w-full" />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }

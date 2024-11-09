@@ -1,3 +1,4 @@
+
 import Product from "@/src/components/Product";
 import { Skeleton } from "@/src/components/ui/skeleton";
 import { getWixServerClient } from "@/src/lib/wix-client.server";
@@ -7,14 +8,14 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-export const dynamic = 'force-dynamic'; // or 'force-static' depending on your needs
-
 interface PageProps {
-  children: React.ReactNode;
-  params: { slug?: string } | any;
+  params: { slug: string };
+  searchParams: { page?: string };
 }
 
-export async function generateMetadata({ params: { slug } }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
   const collection = await getCollectionBySlug(getWixServerClient(), slug);
 
   if (!collection) notFound();
@@ -30,7 +31,10 @@ export async function generateMetadata({ params: { slug } }: PageProps): Promise
   };
 }
 
-const ProductsPage = async ({ params: { slug } }: PageProps) => {
+export default async function Page({
+  params: { slug },
+  searchParams: { page = "1" },
+}: PageProps) {
   const collection = await getCollectionBySlug(getWixServerClient(), slug);
 
   if (!collection?._id) notFound();
@@ -38,31 +42,45 @@ const ProductsPage = async ({ params: { slug } }: PageProps) => {
   return (
     <div className="space-y-5">
       <h2 className="text-2xl font-bold">Products</h2>
-      <Suspense fallback={<LoadingSkeleton />}>
-        <Products collectionId={collection._id} />
+      <Suspense fallback={<LoadingSkeleton />} key={page}>
+        <Products collectionId={collection._id} page={parseInt(page)} />
       </Suspense>
     </div>
   );
-};
+}
 
-export default ProductsPage;
+interface ProductsProps {
+  collectionId: string;
+  page: number;
+}
 
-// Move this function to ensure it is treated as a Server Component
-const Products = async ({ collectionId }: { collectionId: string }) => {
+async function Products({ collectionId, page }: ProductsProps) {
+  const pageSize = 8;
+
   const collectionProducts = await queryProducts(getWixServerClient(), {
     collectionIds: collectionId,
+    // limit: pageSize,
+    // skip: (page - 1) * pageSize,
   });
 
   if (!collectionProducts.length) notFound();
 
+  if (page > (collectionProducts.totalPages || 1)) notFound();
+
   return (
-    <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
-      {collectionProducts.items.map((product) => (
-        <Product key={product._id} product={product} />
-      ))}
+    <div className="space-y-10">
+      <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
+        {collectionProducts.items.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
+      </div>
+      {/* <PaginationBar
+        currentPage={page}
+        totalPages={collectionProducts.totalPages || 1}
+      /> */}
     </div>
   );
-};
+}
 
 function LoadingSkeleton() {
   return (
