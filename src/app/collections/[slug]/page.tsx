@@ -1,4 +1,4 @@
-// import PaginationBar from "@/components/PaginationBar";
+import PaginationBar from "@/components/PaginationBar";
 import Product from "@/components/Product";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getWixServerClient } from "@/lib/wix-client.server";
@@ -55,12 +55,12 @@ interface ProductsProps {
 }
 
 async function Products({ collectionId, page }: ProductsProps) {
-  const pageSize = 8;
+  const pageSize = 12;
 
   const collectionProducts = await queryProducts(getWixServerClient(), {
     collectionIds: collectionId,
-    // limit: pageSize,
-    // skip: (page - 1) * pageSize,
+    limit: pageSize,
+    skip: (page - 1) * pageSize,
   });
 
   if (!collectionProducts.length) notFound();
@@ -74,10 +74,10 @@ async function Products({ collectionId, page }: ProductsProps) {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      {/* <PaginationBar
+      <PaginationBar
         currentPage={page}
         totalPages={collectionProducts.totalPages || 1}
-      /> */}
+      />
     </div>
   );
 }
