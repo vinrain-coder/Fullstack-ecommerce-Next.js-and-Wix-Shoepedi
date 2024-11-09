@@ -32,7 +32,7 @@ export default function MainNavigation({
       <NavigationMenuList>
         {/* Collections on the Left */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="px-5 py-3 text-lg font-semibold">
+          <NavigationMenuTrigger className="px-5 py-3 text-xl font-semibold">
             Collections
           </NavigationMenuTrigger>
 
@@ -64,7 +64,7 @@ export default function MainNavigation({
         <NavigationMenuItem className="ml-auto">
           <Link href="/shop" legacyBehavior passHref>
             <NavigationMenuLink
-              className={`${navigationMenuTriggerStyle()} px-5 py-3 text-[20px] font-semibold`}
+              className={`${navigationMenuTriggerStyle()} px-5 py-3 text-xl font-semibold`}
             >
               Shop
             </NavigationMenuLink>
