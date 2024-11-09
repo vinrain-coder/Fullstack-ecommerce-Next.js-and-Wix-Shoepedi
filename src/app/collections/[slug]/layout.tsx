@@ -4,27 +4,42 @@ import { cn } from "@/lib/utils";
 import { getWixServerClient } from "@/lib/wix-client.server";
 import { getCollectionBySlug } from "@/wix-api/collections";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import { useState, useEffect } from "react";
 
+// Layout component props definition
 interface LayoutProps {
   children: React.ReactNode;
   params: { slug: string };
 }
 
-// @ts-ignore
+// Main Layout component
 export default function Layout({ children, params }: LayoutProps) {
-  return (
-    <Suspense fallback={<LoadingSkeleton />}>
-      <CollectionsLayout params={params}>{children}</CollectionsLayout>
-    </Suspense>
-  );
+  const [loading, setLoading] = useState(true);
+  const [collection, setCollection] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchCollection = async () => {
+      const collectionData = await getCollectionBySlug(getWixServerClient(), params.slug);
+      if (!collectionData) {
+        notFound();
+      } else {
+        setCollection(collectionData);
+      }
+      setLoading(false);
+    };
+
+    fetchCollection();
+  }, [params.slug]);
+
+  if (loading) {
+    return <LoadingSkeleton />;
+  }
+
+  return <CollectionsLayout collection={collection} params={params}>{children}</CollectionsLayout>;
 }
 
-async function CollectionsLayout({ children, params: { slug } }: LayoutProps) {
-  const collection = await getCollectionBySlug(getWixServerClient(), slug);
-
-  if (!collection) notFound();
-
+// CollectionsLayout component for rendering the collection details
+function CollectionsLayout({ children, collection, params: { slug } }: { children: React.ReactNode, collection: any, params: { slug: string } }) {
   const banner = collection.media?.mainMedia?.image;
 
   return (
@@ -44,12 +59,7 @@ async function CollectionsLayout({ children, params: { slug } }: LayoutProps) {
             </h1>
           </div>
         )}
-        <h1
-          className={cn(
-            "mx-auto text-3xl font-bold md:text-4xl",
-            banner && "sm:hidden",
-          )}
-        >
+        <h1 className={cn("mx-auto text-3xl font-bold md:text-4xl", banner && "sm:hidden")}>
           {collection.name}
         </h1>
       </div>
@@ -58,6 +68,7 @@ async function CollectionsLayout({ children, params: { slug } }: LayoutProps) {
   );
 }
 
+// Loading skeleton placeholder component
 function LoadingSkeleton() {
   return (
     <main className="mx-auto max-w-7xl space-y-10 px-5 py-10">
