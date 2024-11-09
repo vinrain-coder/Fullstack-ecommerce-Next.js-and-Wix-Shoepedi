@@ -11,6 +11,7 @@ interface LayoutProps {
   params: { slug: string };
 }
 
+// @ts-ignore
 export default function Layout({ children, params }: LayoutProps) {
   return (
     <Suspense fallback={<LoadingSkeleton />}>

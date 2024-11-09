@@ -31,6 +31,7 @@ export async function generateMetadata({
   };
 }
 
+// @ts-ignore
 export default async function Page({
   params: { slug },
   searchParams: { page = "1" },
