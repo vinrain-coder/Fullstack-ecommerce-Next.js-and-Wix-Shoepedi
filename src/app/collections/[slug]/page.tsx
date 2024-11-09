@@ -7,14 +7,14 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+export const dynamic = 'force-dynamic'; // or 'force-static' depending on your needs
+
 interface PageProps {
   children: React.ReactNode;
   params: { slug?: string } | any;
 }
 
-export async function generateMetadata({
-  params: { slug },
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params: { slug } }: PageProps): Promise<Metadata> {
   const collection = await getCollectionBySlug(getWixServerClient(), slug);
 
   if (!collection) notFound();
@@ -30,7 +30,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params: { slug } }: PageProps) {
+const ProductsPage = async ({ params: { slug } }: PageProps) => {
   const collection = await getCollectionBySlug(getWixServerClient(), slug);
 
   if (!collection?._id) notFound();
@@ -43,13 +43,12 @@ export default async function Page({ params: { slug } }: PageProps) {
       </Suspense>
     </div>
   );
-}
+};
 
-interface ProductsProps {
-  collectionId: string;
-}
+export default ProductsPage;
 
-async function Products({ collectionId }: ProductsProps) {
+// Move this function to ensure it is treated as a Server Component
+const Products = async ({ collectionId }: { collectionId: string }) => {
   const collectionProducts = await queryProducts(getWixServerClient(), {
     collectionIds: collectionId,
   });
@@ -63,7 +62,7 @@ async function Products({ collectionId }: ProductsProps) {
       ))}
     </div>
   );
-}
+};
 
 function LoadingSkeleton() {
   return (
