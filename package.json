@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_IGNORE_TYPE_CHECKS=true next build",
-    "postinstall": "rm -rf node_modules/typescript && echo 'TypeScript removed'",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
