@@ -64,7 +64,7 @@ export default function MainNavigation({
         <NavigationMenuItem className="ml-auto">
           <Link href="/shop" legacyBehavior passHref>
             <NavigationMenuLink
-              className={`${navigationMenuTriggerStyle()} px-5 py-3 text-[18px] font-semibold`}
+              className={`${navigationMenuTriggerStyle()} px-5 py-3 text-[20px] font-semibold`}
             >
               Shop
             </NavigationMenuLink>
