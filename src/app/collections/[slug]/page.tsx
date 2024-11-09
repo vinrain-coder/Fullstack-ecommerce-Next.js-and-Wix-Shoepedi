@@ -29,12 +29,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: Awaited<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function Page({ params: { slug } }: PageProps) {
+  const collection = await getCollectionBySlug(getWixServerClient(), slug);
 
-  const collection = await getCollectionBySlug(getWixServerClient(), params.slug);
-
-  if (!collection) return notFound();
+  if (!collection?._id) notFound();
 
   return (
     <div className="space-y-5">
