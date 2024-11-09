@@ -1,8 +1,8 @@
 "use client";
 
+import useAuth from "@/hooks/auth";
 import { members } from "@wix/members";
-import useAuth from "../hooks/auth";
-import { Button } from "./ui/button";
+import { useTheme } from "next-themes";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +15,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
 import {
   Check,
   LogInIcon,
@@ -25,7 +26,6 @@ import {
   UserIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 
 interface UserButtonProps {
   loggedInMember: members.Member | null;

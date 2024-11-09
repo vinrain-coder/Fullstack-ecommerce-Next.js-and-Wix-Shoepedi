@@ -1,22 +1,22 @@
 "use client";
 
-import { currentCart } from "@wix/ecom";
-import {
-  useCart,
-  useRemoveCartItem,
-  useUpdateCartItemQuantity,
-} from "../hooks/cart";
-import { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Loader2, ShoppingCartIcon, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "../components/ui/sheet";
+} from "@/components/ui/sheet";
+import WixImage from "@/components/WixImage";
+import {
+  useCart,
+  useRemoveCartItem,
+  useUpdateCartItemQuantity,
+} from "@/hooks/cart";
+import { currentCart } from "@wix/ecom";
+import { Loader2, ShoppingCartIcon, X } from "lucide-react";
 import Link from "next/link";
-import WixImage from "../components/WixImage";
+import { useState } from "react";
 
 interface ShoppingCartButtonProps {
   initialData: currentCart.Cart | null;
@@ -31,7 +31,7 @@ export default function ShoppingCartButton({
   const totalQuantity =
     cartQuery.data?.lineItems?.reduce(
       (acc, item) => acc + (item.quantity || 0),
-      0
+      0,
     ) || 0;
 
   return (
@@ -39,7 +39,7 @@ export default function ShoppingCartButton({
       <div className="relative">
         <Button variant="ghost" size="icon" onClick={() => setSheetOpen(true)}>
           <ShoppingCartIcon />
-          <span className="absolute top-0 right-0 size-5 bg-primary text-xs text-primary-foreground items-center justify-center rounded-full">
+          <span className="absolute right-0 top-0 size-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
             {totalQuantity < 10 ? totalQuantity : "9+"}
           </span>
         </Button>
@@ -144,7 +144,7 @@ function ShoppingCartItem({
           />
         </Link>
         <button
-          className="absolute -right-1 -top-1 border bg-background rounded-full p-0.5"
+          className="absolute -right-1 -top-1 rounded-full border bg-background p-0.5"
           onClick={() => removeItemMutation.mutate(productId)}
         >
           <X className="size-3" />
@@ -159,7 +159,7 @@ function ShoppingCartItem({
             {item.descriptionLines
               .map(
                 (line) =>
-                  line.colorInfo?.translated || line.plainText?.translated
+                  line.colorInfo?.translated || line.plainText?.translated,
               )
               .join(", ")}
           </p>

@@ -1,24 +1,23 @@
 "use client";
 
-import WixImage from "@/src/components/WixImage";
-import Badge from "@/src/components/ui/badge";
 import { products } from "@wix/stores";
 import ProductOptions from "./ProductOptions";
 import { useState } from "react";
-import { checkInStock, findVariant } from "@/src/lib/utils";
 import ProductPrice from "./ProductPrice";
 import ProductMedia from "./ProductMedia";
-import { Label } from "@/src/components/ui/label";
-import { Input } from "@/src/components/ui/input";
 import { InfoIcon } from "lucide-react";
+import { checkInStock, findVariant } from "@/lib/utils";
+import Badge from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import AddToCartButton from "@/components/AddToCartButton";
+import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/src/components/ui/accordion";
-import AddToCartButton from "@/src/components/AddToCartButton";
-import BackInStockNotificationButton from "@/src/components/BackInStockNotificationButton";
+} from "@/components/ui/accordion";
 
 interface ProductDetailsProps {
   product: products.Product;
@@ -34,7 +33,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       ?.map((option) => ({
         [option.name || ""]: option.choices?.[0].description || "",
       }))
-      ?.reduce((acc, curr) => ({ ...acc, ...curr }), {}) || {}
+      ?.reduce((acc, curr) => ({ ...acc, ...curr }), {}) || {},
   );
 
   const selectedVariant = findVariant(product, selectedOptions);
@@ -49,7 +48,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   const selectedOptionsMedia = product.productOptions?.flatMap((option) => {
     const selectedChoice = option.choices?.find(
-      (choice) => choice.description === selectedOptions[option.name || ""]
+      (choice) => choice.description === selectedOptions[option.name || ""],
     );
     return selectedChoice?.media?.items ?? [];
   });

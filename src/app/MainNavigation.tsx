@@ -1,6 +1,5 @@
 "use client";
 
-import { collections } from "@wix/stores";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,9 +8,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "../components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import { collections } from "@wix/stores";
 import Link from "next/link";
-import { cn } from "../lib/utils";
 
 interface MainNavigationProps {
   collections: collections.Collection[];

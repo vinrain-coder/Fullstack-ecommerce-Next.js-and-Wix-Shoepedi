@@ -3,8 +3,8 @@ import { useToast } from "./use-toast";
 import {
   BackInStockNotificationRequestValues,
   createBackInStockNotificationRequest,
-} from "../wix-api/backInStockNotifications";
-import { wixBrowserClient } from "../lib/wix-client.browser";
+} from "@/wix-api/backInStockNotifications";
+import { wixBrowserClient } from "@/lib/wix-client.browser";
 
 export function useCreateBackInStockNotificationRequest() {
   const { toast } = useToast();

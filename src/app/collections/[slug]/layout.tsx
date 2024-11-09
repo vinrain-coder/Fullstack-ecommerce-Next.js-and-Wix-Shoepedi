@@ -1,8 +1,8 @@
-import { Skeleton } from "@/src/components/ui/skeleton";
-import WixImage from "@/src/components/WixImage";
-import { cn } from "@/src/lib/utils";
-import { getWixServerClient } from "@/src/lib/wix-client.server";
-import { getCollectionBySlug } from "@/src/wix-api/collections";
+import { Skeleton } from "@/components/ui/skeleton";
+import WixImage from "@/components/WixImage";
+import { cn } from "@/lib/utils";
+import { getWixServerClient } from "@/lib/wix-client.server";
+import { getCollectionBySlug } from "@/wix-api/collections";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 

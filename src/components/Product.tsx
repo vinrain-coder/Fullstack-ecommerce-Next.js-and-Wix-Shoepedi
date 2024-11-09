@@ -1,10 +1,9 @@
 import { products } from "@wix/stores";
 import Link from "next/link";
-import { media as wixMedia } from "@wix/sdk";
 import WixImage from "./WixImage";
 import Badge from "./ui/badge";
-import { formatCurrency } from "../lib/utils";
 import DiscountBadge from "./DiscountBadge";
+import { formatCurrency } from "@/lib/utils";
 
 interface ProductProps {
   product: products.Product;
@@ -16,7 +15,7 @@ export default function Product({ product }: ProductProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="border h-full rounded-sm bg-card"
+      className="h-full rounded-sm border bg-card"
     >
       <div className="relative overflow-hidden">
         <WixImage

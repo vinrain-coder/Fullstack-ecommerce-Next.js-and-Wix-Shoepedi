@@ -1,7 +1,8 @@
+import { WIX_STORES_APP_ID_BACK_IN_STOCK_NOTIFICATIONS } from "@/lib/constants";
+import { findVariant } from "@/lib/utils";
+import { wixClient } from "@/lib/wix-client.base";
 import { products } from "@wix/stores";
-import { wixClient } from "../lib/wix-client.base";
-import { findVariant } from "../lib/utils";
-import { WIX_STORES_APP_ID_BACK_IN_STOCK_NOTIFICATIONS } from "../lib/constants";
+
 
 export interface BackInStockNotificationRequestValues {
   email: string;

@@ -1,3 +1,12 @@
+import { wixBrowserClient } from "@/lib/wix-client.browser";
+import {
+  addToCart,
+  AddToCartValues,
+  getCart,
+  removeCartItem,
+  updateCartItemQuantity,
+  UpdateCartItemQuantityValues,
+} from "@/wix-api/cart";
 import {
   MutationKey,
   QueryKey,
@@ -5,15 +14,6 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import {
-  AddToCartValues,
-  UpdateCartItemQuantityValues,
-  addToCart,
-  getCart,
-  removeCartItem,
-  updateCartItemQuantity,
-} from "../wix-api/cart";
-import { wixBrowserClient } from "../lib/wix-client.browser";
 import { currentCart } from "@wix/ecom";
 import { useToast } from "./use-toast";
 
@@ -72,7 +72,7 @@ export function useUpdateCartItemQuantity() {
         lineItems: oldData?.lineItems?.map((lineItem) =>
           lineItem._id === productId
             ? { ...lineItem, quantity: newQuantity }
-            : lineItem
+            : lineItem,
         ),
       }));
 
@@ -111,7 +111,7 @@ export function useRemoveCartItem() {
       queryClient.setQueryData<currentCart.Cart>(queryKey, (oldData) => ({
         ...oldData,
         lineItems: oldData?.lineItems?.filter(
-          (lineItem) => lineItem._id !== productId
+          (lineItem) => lineItem._id !== productId,
         ),
       }));
 

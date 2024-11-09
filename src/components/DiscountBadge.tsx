@@ -1,6 +1,7 @@
 import { products } from "@wix/stores";
 import Badge from "./ui/badge";
 
+
 interface DiscountBadgeProps {
   data: products.Discount;
 }

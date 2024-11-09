@@ -1,9 +1,9 @@
-import { getProductBySlug } from "@/src/wix-api/products";
 import { notFound } from "next/navigation";
 import ProductDetails from "./ProductDetails";
 import { Metadata } from "next";
-import { delay } from "@/src/lib/utils";
-import { getWixServerClient } from "@/src/lib/wix-client.server";
+import { getProductBySlug } from "@/wix-api/products";
+import { getWixServerClient } from "@/lib/wix-client.server";
+import { delay } from "@/lib/utils";
 
 // Updated PageProps with Promise for params
 interface PageProps {
@@ -15,7 +15,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   // Await the params since it's a Promise
   const { slug } = await params;
-  
+
   const product = await getProductBySlug(getWixServerClient(), slug);
 
   if (!product) notFound();
@@ -43,7 +43,7 @@ export async function generateMetadata({
 export default async function Page({ params }: PageProps) {
   // Await the params since it's a Promise
   const { slug } = await params;
-  
+
   await delay(5000);
 
   const product = await getProductBySlug(getWixServerClient(), slug);
@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
   if (!product?._id) notFound();
 
   return (
-    <main className="max-w-7xl mx-auto space-y-10 px-5 py-10">
+    <main className="mx-auto max-w-7xl space-y-10 px-5 py-10">
       <ProductDetails product={product} />
     </main>
   );

@@ -1,13 +1,13 @@
-import Link from "next/link";
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
+import { getWixServerClient } from "@/lib/wix-client.server";
+import { getCart } from "@/wix-api/cart";
+import { getCollection } from "@/wix-api/collections";
+import { getLoggedInMember } from "@/wix-api/members";
 import Image from "next/image";
-import { getCart } from "../wix-api/cart";
-import { getWixServerClient } from "../lib/wix-client.server";
-import ShoppingCartButton from "./ShoppingCartButton";
-import UserButton from "../components/UserButton";
-import { getLoggedInMember } from "../wix-api/members";
-import { getCollection } from "../wix-api/collections";
+import Link from "next/link";
 import MainNavigation from "./MainNavigation";
+import UserButton from "@/components/UserButton";
+import ShoppingCartButton from "./ShoppingCartButton";
 
 export default async function Navbar() {
   const wixClient = getWixServerClient();

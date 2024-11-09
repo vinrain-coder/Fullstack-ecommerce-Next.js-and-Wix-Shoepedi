@@ -1,9 +1,9 @@
+import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
 import { useToast } from "./use-toast";
-import { generateOAuthData, getLoginUrl, getLogoutUrl } from "../wix-api/auth";
-import { wixBrowserClient } from "../lib/wix-client.browser";
-import { WIX_OAUTH_DATA_COOKIE, WIX_SESSION_COOKIE } from "../lib/constants";
-import Cookies from "js-cookie";
+import { generateOAuthData, getLoginUrl, getLogoutUrl } from "@/wix-api/auth";
+import { wixBrowserClient } from "@/lib/wix-client.browser";
+import { WIX_OAUTH_DATA_COOKIE, WIX_SESSION_COOKIE } from "@/lib/constants";
 
 export default function useAuth() {
   const pathname = usePathname();

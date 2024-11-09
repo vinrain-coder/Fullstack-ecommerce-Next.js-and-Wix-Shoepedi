@@ -1,6 +1,6 @@
 import { cache } from "react";
-import { wixClient } from "../lib/wix-client.base";
 import { members } from "@wix/members";
+import { wixClient } from "@/lib/wix-client.base";
 
 export const getLoggedInMember = cache(
   async (wixClient: wixClient): Promise<members.Member | null> => {

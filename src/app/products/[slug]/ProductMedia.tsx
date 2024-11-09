@@ -1,5 +1,5 @@
-import WixImage from "@/src/components/WixImage";
-import { cn } from "@/src/lib/utils";
+import WixImage from "@/components/WixImage";
+import { cn } from "@/lib/utils";
 import { products } from "@wix/stores";
 import { PlayIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ export default function ProductMedia({ media }: ProductMediaProps) {
   const selectedVideo = selectedMedia?.video?.files?.[0];
 
   return (
-    <div className="basis-2/5 md:sticky md:top-10 h-fit space-y-5">
+    <div className="h-fit basis-2/5 space-y-5 md:sticky md:top-10">
       <div className="aspect-square bg-secondary">
         {selectedImage?.url ? (
           <Zoom key={selectedImage.url}>
@@ -79,7 +79,7 @@ function MediaPreview({ mediaItem, isSelected, onSelect }: MediaPreviewProps) {
     <div
       className={cn(
         "relative cursor-pointer bg-secondary",
-        isSelected && "outline outline-1 outline-primary"
+        isSelected && "outline outline-1 outline-primary",
       )}
     >
       <WixImage
@@ -90,7 +90,7 @@ function MediaPreview({ mediaItem, isSelected, onSelect }: MediaPreviewProps) {
         onMouseEnter={onSelect}
       />
       {resolvedThumbnailUrl && (
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/40 rounded-full size-9 flex items-center justify-center">
+        <span className="absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/40">
           <PlayIcon className="size-5 text-white/60" />
         </span>
       )}

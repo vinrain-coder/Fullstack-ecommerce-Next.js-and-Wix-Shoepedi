@@ -1,5 +1,5 @@
-import { WIX_OAUTH_DATA_COOKIE, WIX_SESSION_COOKIE } from "@/src/lib/constants";
-import { getWixServerClient } from "@/src/lib/wix-client.server";
+import { WIX_OAUTH_DATA_COOKIE, WIX_SESSION_COOKIE } from "@/lib/constants";
+import { getWixServerClient } from "@/lib/wix-client.server";
 import { OauthData } from "@wix/sdk";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
   const memberTokens = await wixClient.auth.getMemberTokens(
     code,
     state,
-    oAuthData
+    oAuthData,
   );
 
   await cookieStore.delete(WIX_OAUTH_DATA_COOKIE);

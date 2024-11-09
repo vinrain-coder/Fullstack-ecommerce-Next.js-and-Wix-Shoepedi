@@ -1,9 +1,9 @@
+import Product from "@/components/Product";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getWixServerClient } from "@/lib/wix-client.server";
+import { getCollectionBySlug } from "@/wix-api/collections";
+import { queryProducts } from "@/wix-api/products";
 
-import Product from "@/src/components/Product";
-import { Skeleton } from "@/src/components/ui/skeleton";
-import { getWixServerClient } from "@/src/lib/wix-client.server";
-import { getCollectionBySlug } from "@/src/wix-api/collections";
-import { queryProducts } from "@/src/wix-api/products";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";

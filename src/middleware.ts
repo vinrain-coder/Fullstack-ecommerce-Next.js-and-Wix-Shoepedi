@@ -1,6 +1,6 @@
 import { OAuthStrategy, Tokens, createClient } from "@wix/sdk";
-import { env } from "./env";
 import { NextRequest, NextResponse } from "next/server";
+import { env } from "./env";
 import { WIX_SESSION_COOKIE } from "./lib/constants";
 
 const wixClient = createClient({

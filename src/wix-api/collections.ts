@@ -1,6 +1,6 @@
 import { cache } from "react";
-import { wixClient } from "../lib/wix-client.base";
 import { collections } from "@wix/stores";
+import { wixClient } from "@/lib/wix-client.base";
 
 export const getCollectionBySlug = cache(
   async (wixClient: wixClient, slug: string) => {

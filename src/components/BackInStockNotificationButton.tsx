@@ -1,10 +1,11 @@
-import { products } from "@wix/stores";
-import { Button, ButtonProps } from "./ui/button";
-import { useCreateBackInStockNotificationRequest } from "../hooks/back-in-stock";
-import { z } from "zod";
-import { requiredString } from "../lib/validation";
-import { useForm } from "react-hook-form";
+import { requiredString } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button, ButtonProps } from "./ui/button";
+import { products } from "@wix/stores";
+import { useForm } from "react-hook-form";
+import { useCreateBackInStockNotificationRequest } from "@/hooks/back-in-stock";
+import { env } from "@/env";
 import {
   Dialog,
   DialogContent,
@@ -23,7 +24,6 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import LoadingButton from "./LoadingButton";
-import { env } from "../env";
 
 const formSchema = z.object({
   email: requiredString.email(),

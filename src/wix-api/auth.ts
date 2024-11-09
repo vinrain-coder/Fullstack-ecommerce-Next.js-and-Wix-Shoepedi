@@ -1,6 +1,7 @@
+import { env } from "@/env";
+import { wixClient } from "@/lib/wix-client.base";
 import { OauthData } from "@wix/sdk";
-import { env } from "../env";
-import { wixClient } from "../lib/wix-client.base";
+
 
 export async function generateOAuthData(
   wixClient: wixClient,

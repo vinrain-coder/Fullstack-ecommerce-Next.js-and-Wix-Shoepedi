@@ -1,5 +1,5 @@
+import { wixClient } from "@/lib/wix-client.base";
 import { cache } from "react";
-import { wixClient } from "../lib/wix-client.base";
 
 type ProductsSort = "last_updated" | "price_asc" | "price_desc";
 

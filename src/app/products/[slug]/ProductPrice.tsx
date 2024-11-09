@@ -1,5 +1,5 @@
-import DiscountBadge from "@/src/components/DiscountBadge";
-import { cn } from "@/src/lib/utils";
+import DiscountBadge from "@/components/DiscountBadge";
+import { cn } from "@/lib/utils";
 import { products } from "@wix/stores";
 
 interface ProductPriceProps {
@@ -18,7 +18,7 @@ export default function ProductPrice({
   const hasDiscount = priceData.discountedPrice !== priceData.price;
 
   return (
-    <div className="flex items-center gap-2.5 text-s=xl font-bold">
+    <div className="text-s=xl flex items-center gap-2.5 font-bold">
       <span className={cn(hasDiscount && "text-muted-foreground line-through")}>
         {priceData.formatted?.price}
       </span>
