@@ -44,7 +44,7 @@ export default function UserButton({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" variant="ghost" className={className}>
-          <UserIcon />
+          <UserIcon style={{ width: "30px", height: "30px" }} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-44 max-w-64">

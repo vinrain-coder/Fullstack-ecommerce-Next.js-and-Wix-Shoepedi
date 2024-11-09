@@ -23,17 +23,19 @@ export default function MainNavigation({
   className,
 }: MainNavigationProps) {
   return (
-    <NavigationMenu className={className}>
+    <NavigationMenu
+      className={cn(
+        "ml-8",
+        className,
+      )}
+    >
       <NavigationMenuList>
+        {/* Collections on the Left */}
         <NavigationMenuItem>
-          <Link href="/shop" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Shop
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Collections</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="px-5 py-3 text-lg font-semibold">
+            Collections
+          </NavigationMenuTrigger>
+
           <NavigationMenuContent>
             <ul className="p-4">
               {collections.map((collection) => (
@@ -56,6 +58,17 @@ export default function MainNavigation({
               ))}
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        {/* Shop on the Right */}
+        <NavigationMenuItem className="ml-auto">
+          <Link href="/shop" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={`${navigationMenuTriggerStyle()} px-5 py-3 text-[18px] font-semibold`}
+            >
+              Shop
+            </NavigationMenuLink>
+          </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

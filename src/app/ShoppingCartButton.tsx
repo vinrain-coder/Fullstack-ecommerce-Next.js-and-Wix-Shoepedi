@@ -39,12 +39,25 @@ export default function ShoppingCartButton({
   return (
     <>
       <div className="relative">
-        <Button variant="ghost" size="icon" onClick={() => setSheetOpen(true)}>
-          <ShoppingCartIcon />
-          <span className="absolute right-0 top-0 flex size-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
-            {totalQuantity < 10 ? totalQuantity : "9+"}
-          </span>
-        </Button>
+      <Button
+  variant="ghost"
+  size="icon"
+  onClick={() => setSheetOpen(true)}
+  style={{ padding: '12px' }} // Adjust padding to fit a larger icon
+>
+  <ShoppingCartIcon style={{ width: '30px', height: '30px' }} />
+  <span
+    className="absolute right-0 top-0 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
+    style={{
+      width: '20px', // Adjust badge size
+      height: '20px',
+      fontSize: '13px',
+    }}
+  >
+    {totalQuantity < 10 ? totalQuantity : '9+'}
+  </span>
+</Button>
+
       </div>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent className="flex flex-col sm:max-w-lg">
