@@ -52,7 +52,7 @@ export default function PaginationBar({
           if (!isEdgePage && !isNearCurrentPage) {
             if (i === 1 || i === totalPages - 2) {
               return (
-                <PaginationItem key={page} className="hidden md:block">
+                <PaginationItem key={page} className="block">
                   <PaginationEllipsis className="text-muted-foreground" />
                 </PaginationItem>
               );
@@ -63,7 +63,7 @@ export default function PaginationBar({
             <PaginationItem
               key={page}
               className={cn(
-                "hidden md:block",
+                "block",
                 page === currentPage && "pointer-events-none block",
               )}
             >

@@ -3,7 +3,6 @@ import ProductDetails from "./ProductDetails";
 import { Metadata } from "next";
 import { getProductBySlug } from "@/wix-api/products";
 import { getWixServerClient } from "@/lib/wix-client.server";
-import { delay } from "@/lib/utils";
 
 // Updated PageProps with Promise for params
 interface PageProps {
@@ -43,8 +42,6 @@ export async function generateMetadata({
 export default async function Page({ params }: PageProps) {
   // Await the params since it's a Promise
   const { slug } = await params;
-
-  await delay(5000);
 
   const product = await getProductBySlug(getWixServerClient(), slug);
 

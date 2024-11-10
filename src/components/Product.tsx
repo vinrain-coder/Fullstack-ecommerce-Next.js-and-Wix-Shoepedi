@@ -15,7 +15,7 @@ export default function Product({ product }: ProductProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="h-full rounded-sm border bg-card"
+      className="h-full rounded-sm border bg-card overflow-hidden"
     >
       <div className="relative overflow-hidden">
         <WixImage

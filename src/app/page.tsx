@@ -2,7 +2,6 @@ import banner from "@/assets/banner.jpg";
 import Product from "@/components/Product";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { delay } from "@/lib/utils";
 import { getWixServerClient } from "@/lib/wix-client.server";
 import { getCollectionBySlug } from "@/wix-api/collections";
 import { queryProducts } from "@/wix-api/products";
@@ -14,7 +13,7 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <main className="mx-auto max-w-7xl space-y-10 px-5 py-10">
-      <div className="flex items-center rounded-sm bg-secondary md:h-96">
+      <div className="flex items-center bg-secondary md:h-96 rounded-sm overflow-hidden">
         <div className="space-y-7 p-10 text-center md:w-1/2">
           <h1 className="text-3xl font-bold text-red-500 md:text-4xl">
             Fill the void in your heart
@@ -46,7 +45,6 @@ export default function Home() {
 }
 
 async function FeaturedProducts() {
-  await delay(1000);
 
   const wixClient = getWixServerClient();
 
