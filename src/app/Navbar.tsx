@@ -41,7 +41,7 @@ export default async function Navbar() {
           />
         </div>
         <SearchField className="hidden max-w-96 lg:inline" />
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center">
           <UserButton
             loggedInMember={loggedInMember}
           />

@@ -39,31 +39,30 @@ export default function ShoppingCartButton({
   return (
     <>
       <div className="relative">
-      <Button
-  variant="ghost"
-  size="icon"
-  onClick={() => setSheetOpen(true)}
-  style={{ padding: '12px' }} 
->
-  <ShoppingCartIcon style={{ width: '30px', height: '30px' }} />
-  <span
-    className="absolute right-0 top-0 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
-    style={{
-      width: '20px', 
-      height: '20px',
-      fontSize: '13px',
-    }}
-  >
-    {totalQuantity < 10 ? totalQuantity : '9+'}
-  </span>
-</Button>
-
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setSheetOpen(true)}
+          style={{ padding: "12px" }}
+        >
+          <ShoppingCartIcon style={{ width: "30px", height: "30px" }} />
+          <span
+            className="absolute right-0 top-0 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
+            style={{
+              width: "20px",
+              height: "20px",
+              fontSize: "13px",
+            }}
+          >
+            {totalQuantity < 10 ? totalQuantity : "9+"}
+          </span>
+        </Button>
       </div>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetContent className="flex flex-col sm:max-w-lg">
+        <SheetContent className="flex flex-col w-full sm:max-w-lg">
           <SheetHeader>
             <SheetTitle>
-              Your cart{" "}
+              Your cart{" "} 
               <span className="text-base">
                 ({totalQuantity} {totalQuantity === 1 ? "item" : "items"})
               </span>
@@ -216,7 +215,7 @@ function ShoppingCartItem({
           >
             +
           </Button>
-          {quantityLimitReached && <span>Quantity limit reached</span>}
+          {quantityLimitReached && <span className="text-red-500">Quantity limit reached</span>}
         </div>
       </div>
     </li>
