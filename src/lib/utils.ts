@@ -1,6 +1,10 @@
 import { products } from "@wix/stores";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../../tailwind.config";
+
+export const twConfig = resolveConfig(tailwindConfig);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,23 +16,23 @@ export async function delay(ms: number) {
 
 export function formatCurrency(
   price: number | string = 0,
-  currency: string = "KSH"
+  currency: string = "KSH",
 ) {
   return Intl.NumberFormat("en", { style: "currency", currency }).format(
-    Number(price)
+    Number(price),
   );
 }
 
 export function findVariant(
   product: products.Product,
-  selectedOptions: Record<string, string>
+  selectedOptions: Record<string, string>,
 ) {
   if (!product.manageVariants) return null;
 
   return (
     product.variants?.find((variant) => {
       return Object.entries(selectedOptions).every(
-        ([key, value]) => variant.choices?.[key] === value
+        ([key, value]) => variant.choices?.[key] === value,
       );
     }) || null
   );
@@ -36,7 +40,7 @@ export function findVariant(
 
 export function checkInStock(
   product: products.Product,
-  selectedOptions: Record<string, string>
+  selectedOptions: Record<string, string>,
 ) {
   const variant = findVariant(product, selectedOptions);
 
