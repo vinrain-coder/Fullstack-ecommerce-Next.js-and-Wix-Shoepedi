@@ -1,6 +1,6 @@
 "use client";
 
-// import CheckoutButton from "@/components/CheckoutButton";
+import CheckoutButton from "@/components/CheckoutButton";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -43,13 +43,13 @@ export default function ShoppingCartButton({
   variant="ghost"
   size="icon"
   onClick={() => setSheetOpen(true)}
-  style={{ padding: '12px' }} // Adjust padding to fit a larger icon
+  style={{ padding: '12px' }} 
 >
   <ShoppingCartIcon style={{ width: '30px', height: '30px' }} />
   <span
     className="absolute right-0 top-0 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
     style={{
-      width: '20px', // Adjust badge size
+      width: '20px', 
       height: '20px',
       fontSize: '13px',
     }}
@@ -112,10 +112,10 @@ export default function ShoppingCartButton({
                 Shipping and taxes calculated at checkout
               </p>
             </div>
-            {/* <CheckoutButton
+            <CheckoutButton
               size="lg"
               disabled={!totalQuantity || cartQuery.isFetching}
-            /> */}
+            />
           </div>
         </SheetContent>
       </Sheet>

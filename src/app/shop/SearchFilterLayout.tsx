@@ -60,10 +60,11 @@ export default function SearchFilterLayout({
 
   return (
     <main className="group flex flex-col items-center justify-center gap-10 px-5 py-10 lg:flex-row lg:items-start">
-      <aside
+      <div
         className="h-fit space-y-5 lg:sticky lg:top-10 lg:w-64"
         data-pending={isPending ? "" : undefined}
       >
+        
         <CollectionsFilter
           collections={collections}
           selectedCollectionIds={optimisticFilters.collection}
@@ -81,7 +82,7 @@ export default function SearchFilterLayout({
             })
           }
         />
-      </aside>
+      </div>
       <div className="w-full max-w-7xl space-y-5">
         <div className="flex justify-center lg:justify-end">
           <SortFilter
