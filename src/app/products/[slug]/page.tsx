@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
     <main className="mx-auto max-w-7xl space-y-10 px-5 py-10">
       <ProductDetails product={product} />
       <hr />
-      <Suspense>
+      <Suspense fallback={<RelatedProductsLoadingSkeleton />}>
         <RelatedProducts productId={product._id} />
       </Suspense>
     </main>
