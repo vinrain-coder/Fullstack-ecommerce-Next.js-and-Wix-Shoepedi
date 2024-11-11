@@ -55,7 +55,7 @@ export default function UserButton({
               {loggedInMember.contact?.firstName || loggedInMember.loginEmail}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <Link href="profile">
+            <Link href="/profile">
               <DropdownMenuItem>
                 <UserIcon className="mr-2 size-4" />
                 Profile
