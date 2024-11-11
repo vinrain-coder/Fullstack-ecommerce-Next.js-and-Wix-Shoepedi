@@ -1,23 +1,24 @@
 "use client";
 
-import { products } from "@wix/stores";
-import ProductOptions from "./ProductOptions";
-import { useState } from "react";
-import ProductPrice from "./ProductPrice";
-import ProductMedia from "./ProductMedia";
-import { InfoIcon } from "lucide-react";
-import { checkInStock, findVariant } from "@/lib/utils";
-import Badge from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import AddToCartButton from "@/components/AddToCartButton";
 import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
+import BuyNowButton from "@/components/BuyNowButton";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Badge from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { checkInStock, findVariant } from "@/lib/utils";
+import { products } from "@wix/stores";
+import { InfoIcon } from "lucide-react";
+import { useState } from "react";
+import ProductMedia from "./ProductMedia";
+import ProductOptions from "./ProductOptions";
+import ProductPrice from "./ProductPrice";
 
 interface ProductDetailsProps {
   product: products.Product;
@@ -82,7 +83,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
-
         <div className="space-y-1.5">
           <Label htmlFor="quantity">Quantity</Label>
           <div className="flex items-center gap-2.5">
@@ -97,19 +97,27 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             {!!availableQuantity &&
               (availableQuantityExceeded || availableQuantity < 10) && (
                 <span className="text-destructive">
-                  Only {availableQuantity} left in stock.
+                  Only {availableQuantity} left in stock
                 </span>
               )}
           </div>
         </div>
         {inStock ? (
-          <AddToCartButton
-            product={product}
-            selectedOptions={selectedOptions}
-            quantity={quantity}
-            disabled={availableQuantityExceeded || quantity < 1}
-            className="w-full"
-          />
+          <div className="flex items-center gap-2.5">
+            <AddToCartButton
+              product={product}
+              selectedOptions={selectedOptions}
+              quantity={quantity}
+              disabled={availableQuantityExceeded || quantity < 1}
+              className="w-full"
+            />
+            <BuyNowButton
+              product={product}
+              selectedOptions={selectedOptions}
+              quantity={quantity}
+              disabled={availableQuantityExceeded || quantity < 1}
+            />
+          </div>
         ) : (
           <BackInStockNotificationButton
             product={product}

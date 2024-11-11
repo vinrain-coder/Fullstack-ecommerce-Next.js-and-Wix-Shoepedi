@@ -44,7 +44,6 @@ export default async function Navbar() {
         <div className="flex items-center justify-center gap-5">
           <UserButton
             loggedInMember={loggedInMember}
-            className="hidden lg:inline-flex"
           />
           <ShoppingCartButton initialData={cart} />
         </div>

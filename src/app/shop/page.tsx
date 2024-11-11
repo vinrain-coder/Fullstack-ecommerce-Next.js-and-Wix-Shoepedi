@@ -70,7 +70,7 @@ async function ProductResults({
   priceMax,
   sort,
 }: ProductResultsProps) {
-  const pageSize = 8;
+  const pageSize = 12;
 
   const products = await queryProducts(getWixServerClient(), {
     q,
@@ -105,7 +105,7 @@ function LoadingSkeleton() {
     <div className="space-y-10">
       <Skeleton className="mx-auto h-9 w-52" />
       <div className="flex grid-cols-2 flex-col gap-5 sm:grid xl:grid-cols-3 2xl:grid-cols-4">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 12 }).map((_, i) => (
           <Skeleton key={i} className="h-[26rem]" />
         ))}
       </div>

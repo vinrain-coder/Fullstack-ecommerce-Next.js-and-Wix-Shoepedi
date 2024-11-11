@@ -64,7 +64,7 @@ function LoadingSkeleton() {
       <div className="space-y-5">
         <h2 className="text-2xl font-bold">Products</h2>
         <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 12 }).map((_, i) => (
             <Skeleton key={i} className="h-[26rem] w-full" />
           ))}
         </div>
