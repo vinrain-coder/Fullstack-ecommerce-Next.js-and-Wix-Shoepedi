@@ -46,7 +46,7 @@ export default async function Page({
           collectionIds={collectionIds}
           priceMin={price_min ? parseInt(price_min) : undefined}
           priceMax={price_max ? parseInt(price_max) : undefined}
-            sort={sort as ProductsSort}
+          sort={sort as ProductsSort}
         />
       </Suspense>
     </div>
@@ -59,7 +59,7 @@ interface ProductResultsProps {
   collectionIds?: string[];
   priceMin?: number;
   priceMax?: number;
-    sort?: ProductsSort;
+  sort?: ProductsSort;
 }
 
 async function ProductResults({
@@ -68,9 +68,9 @@ async function ProductResults({
   collectionIds,
   priceMin,
   priceMax,
-    sort,
+  sort,
 }: ProductResultsProps) {
-  const pageSize = 12;
+  const pageSize = 8;
 
   const products = await queryProducts(getWixServerClient(), {
     q,
@@ -85,36 +85,29 @@ async function ProductResults({
   if (page > (products.totalPages || 1)) notFound();
 
   return (
-    <div className="mx-auto max-w-7xl space-y-10 px-5 pb-10">
-      <div className="space-y-10 group-has-[[data-pending]]:animate-pulse">
-        <p className="text-center text-xl">
-          {products.totalCount}{" "}
-          {products.totalCount === 1 ? "product" : "products"} found
-        </p>
-        <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
-          {products.items.map((product) => (
-            <Product key={product._id} product={product} />
-          ))}
-        </div>
-        <PaginationBar
-          currentPage={page}
-          totalPages={products.totalPages || 1}
-        />
+    <div className="space-y-10 group-has-[[data-pending]]:animate-pulse">
+      <p className="text-center text-xl">
+        {products.totalCount}{" "}
+        {products.totalCount === 1 ? "product" : "products"} found
+      </p>
+      <div className="flex grid-cols-2 flex-col gap-5 sm:grid xl:grid-cols-3 2xl:grid-cols-4">
+        {products.items.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
       </div>
+      <PaginationBar currentPage={page} totalPages={products.totalPages || 1} />
     </div>
   );
 }
 
 function LoadingSkeleton() {
   return (
-    <div className="mx-auto max-w-7xl space-y-10 px-5 pb-10">
-      <div className="space-y-10">
-        <Skeleton className="mx-auto h-9 w-52" />
-        <div className="flex grid-cols-2 flex-col gap-5 sm:grid md:grid-cols-3 lg:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <Skeleton key={i} className="h-[26rem]" />
-          ))}
-        </div>
+    <div className="space-y-10">
+      <Skeleton className="mx-auto h-9 w-52" />
+      <div className="flex grid-cols-2 flex-col gap-5 sm:grid xl:grid-cols-3 2xl:grid-cols-4">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <Skeleton key={i} className="h-[26rem]" />
+        ))}
       </div>
     </div>
   );

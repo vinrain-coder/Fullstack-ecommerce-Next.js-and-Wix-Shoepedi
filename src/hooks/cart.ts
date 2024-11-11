@@ -130,3 +130,18 @@ export function useRemoveCartItem() {
     },
   });
 }
+
+
+export function useClearCart() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    //@ts-ignore
+    mutationFn: () => clearCart(wixBrowserClient),
+    onSuccess() {
+      queryClient.setQueryData(queryKey, null);
+      queryClient.invalidateQueries({ queryKey });
+    },
+    retry: 3,
+  });
+}
