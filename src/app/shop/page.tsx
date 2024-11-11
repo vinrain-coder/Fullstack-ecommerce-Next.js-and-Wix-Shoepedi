@@ -2,7 +2,7 @@ import PaginationBar from "@/components/PaginationBar";
 import Product from "@/components/Product";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getWixServerClient } from "@/lib/wix-client.server";
-import { queryProducts } from "@/wix-api/products";
+import { ProductsSort, queryProducts } from "@/wix-api/products";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -46,7 +46,7 @@ export default async function Page({
           collectionIds={collectionIds}
           priceMin={price_min ? parseInt(price_min) : undefined}
           priceMax={price_max ? parseInt(price_max) : undefined}
-          //   sort={sort as ProductsSort}
+            sort={sort as ProductsSort}
         />
       </Suspense>
     </div>
@@ -59,7 +59,7 @@ interface ProductResultsProps {
   collectionIds?: string[];
   priceMin?: number;
   priceMax?: number;
-  //   sort?: ProductsSort;
+    sort?: ProductsSort;
 }
 
 async function ProductResults({
@@ -68,18 +68,18 @@ async function ProductResults({
   collectionIds,
   priceMin,
   priceMax,
-  //   sort,
+    sort,
 }: ProductResultsProps) {
-  const pageSize = 8;
+  const pageSize = 12;
 
   const products = await queryProducts(getWixServerClient(), {
     q,
     limit: pageSize,
     skip: (page - 1) * pageSize,
     collectionIds,
-    // priceMin,
-    // priceMax,
-    // sort,
+    priceMin,
+    priceMax,
+    sort,
   });
 
   if (page > (products.totalPages || 1)) notFound();

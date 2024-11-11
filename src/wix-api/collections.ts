@@ -11,7 +11,7 @@ export const getCollectionBySlug = cache(
   },
 );
 
-export const getCollection = cache(
+export const getCollections = cache(
   async (wixClient: wixClient): Promise<collections.Collection[]> => {
     const collections = await wixClient.collections
       .queryCollections()
