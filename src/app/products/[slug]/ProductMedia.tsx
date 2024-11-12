@@ -22,7 +22,7 @@ export default function ProductMedia({ media }: ProductMediaProps) {
 
   return (
     <div className="h-fit basis-2/5 space-y-5 md:sticky md:top-10">
-      <div className="aspect-square bg-secondary">
+      <div className="aspect-square overflow-hidden rounded-sm bg-secondary">
         {selectedImage?.url ? (
           <Zoom key={selectedImage.url}>
             <WixImage
@@ -30,11 +30,12 @@ export default function ProductMedia({ media }: ProductMediaProps) {
               alt={selectedImage.altText}
               width={1000}
               height={1000}
+              className="h-full w-full object-cover"
             />
           </Zoom>
         ) : selectedVideo?.url ? (
-          <div className="flex size-full items-center bg-black">
-            <video controls className="size-full">
+          <div className="flex h-full w-full items-center justify-center bg-black">
+            <video controls className="h-full w-full rounded-sm object-cover">
               <source
                 src={selectedVideo.url}
                 type={`video/${selectedVideo.format}`}
@@ -43,6 +44,7 @@ export default function ProductMedia({ media }: ProductMediaProps) {
           </div>
         ) : null}
       </div>
+
       {media.length > 1 && (
         <div className="flex flex-wrap gap-5">
           {media.map((mediaItem) => (
@@ -78,7 +80,7 @@ function MediaPreview({ mediaItem, isSelected, onSelect }: MediaPreviewProps) {
   return (
     <div
       className={cn(
-        "relative cursor-pointer bg-secondary",
+        "relative cursor-pointer rounded-sm bg-secondary",
         isSelected && "outline outline-1 outline-primary",
       )}
     >
@@ -88,6 +90,7 @@ function MediaPreview({ mediaItem, isSelected, onSelect }: MediaPreviewProps) {
         width={100}
         height={100}
         onMouseEnter={onSelect}
+        className="rounded-sm"
       />
       {resolvedThumbnailUrl && (
         <span className="absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/40">

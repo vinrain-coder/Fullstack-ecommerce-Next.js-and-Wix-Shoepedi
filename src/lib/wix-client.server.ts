@@ -1,4 +1,6 @@
-import { Tokens } from "@wix/sdk";
+import { env } from "@/env";
+import { files } from "@wix/media";
+import { ApiKeyStrategy, createClient, Tokens } from "@wix/sdk";
 import { cookies } from "next/headers";
 import { cache } from "react";
 import { WIX_SESSION_COOKIE } from "./constants";
@@ -8,11 +10,23 @@ export const getWixServerClient = cache(() => {
   let tokens: Tokens | undefined;
 
   try {
-    // @ts-ignore
+    //@ts-expect-error
     tokens = JSON.parse(cookies().get(WIX_SESSION_COOKIE)?.value || "{}");
-  } catch (error) {
-    console.error("Error parsing tokens from cookies:", error);
-  }
+  } catch (error) {}
 
   return getWixClient(tokens);
+});
+
+export const getWixAdminClient = cache(() => {
+  const wixClient = createClient({
+    modules: {
+      files,
+    },
+    auth: ApiKeyStrategy({
+      apiKey: env.WIX_API_KEY,
+      siteId: env.NEXT_PUBLIC_WIX_SITE_ID,
+    }),
+  });
+
+  return wixClient;
 });

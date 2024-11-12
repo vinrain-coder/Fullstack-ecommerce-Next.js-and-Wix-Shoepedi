@@ -227,7 +227,7 @@ export default function Footer() {
         <hr className="mb-10 mt-16" />
 
         <p className="text-center text-sm text-muted-foreground">
-          © Copyright {new Date().getFullYear()}, All Rights Reserved by Flow
+          © Copyright {new Date().getFullYear()}, All Rights Reserved by ShoePedi
           Shop
         </p>
       </div>

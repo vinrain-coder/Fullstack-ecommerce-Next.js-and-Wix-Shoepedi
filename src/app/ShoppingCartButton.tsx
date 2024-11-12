@@ -215,7 +215,7 @@ function ShoppingCartItem({
           >
             +
           </Button>
-          {quantityLimitReached && <span className="text-red-500">Quantity limit reached</span>}
+          {quantityLimitReached && <span className="text-destructive">Quantity limit reached</span>}
         </div>
       </div>
     </li>
