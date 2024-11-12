@@ -46,7 +46,7 @@ export default function ProductMedia({ media }: ProductMediaProps) {
       </div>
 
       {media.length > 1 && (
-        <div className="flex flex-wrap gap-5">
+        <div className="flex flex-wrap gap-2">
           {media.map((mediaItem) => (
             <MediaPreview
               key={mediaItem._id}

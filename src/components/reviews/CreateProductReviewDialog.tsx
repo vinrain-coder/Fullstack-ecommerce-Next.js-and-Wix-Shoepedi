@@ -114,7 +114,7 @@ export default function CreateProductReviewDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Write a review</DialogTitle>
           <DialogDescription>
