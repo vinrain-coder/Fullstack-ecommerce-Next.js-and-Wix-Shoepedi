@@ -36,7 +36,16 @@ export default function RootLayout({
             {children}
             <Footer />
           </ReactQueryProvider>
-          <Toaster />
+          <Toaster 
+  position="top-right" 
+  richColors
+  duration={3000}
+  closeButton
+  theme="light" 
+  expand 
+  visibleToasts={3} 
+/>
+          
         </ThemeProvider>
       </body>
     </html>
